@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { SparklesIcon, DocumentPlusIcon } from '@heroicons/react/24/outline';
-import image1 from '../assets/cv_images/1.jpeg';
-import image2 from '../assets/cv_images/8.jpeg';
-import image3 from '../assets/cv_images/3.jpeg';
-import image4 from '../assets/cv_images/4.jpeg';
+import image1 from '../../cv_images/1.jpeg';
+import image2 from '../../cv_images/8.jpeg';
+import image3 from '../../cv_images/3.jpeg';
+import image4 from '../../cv_images/4.jpeg';
 import { authService } from '../services/auth';
 
 const templates = [
