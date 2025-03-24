@@ -437,6 +437,32 @@ const ResumeBuilder = () => {
     }));
   };
 
+  // Add helper functions for expertise subsections
+  const addExpertiseEntry = (subsection) => {
+    setResumeData({
+      ...resumeData,
+      [subsection]: [...resumeData[subsection], ''], // Add an empty entry
+    });
+  };
+
+  const updateExpertiseEntry = (subsection, index, value) => {
+    const updatedEntries = [...resumeData[subsection]];
+    updatedEntries[index] = value;
+    setResumeData({
+      ...resumeData,
+      [subsection]: updatedEntries,
+    });
+  };
+
+  const removeExpertiseEntry = (subsection, index) => {
+    const updatedEntries = [...resumeData[subsection]];
+    updatedEntries.splice(index, 1);
+    setResumeData({
+      ...resumeData,
+      [subsection]: updatedEntries,
+    });
+  };
+
   // Render section editor based on active section
   const renderSectionEditor = () => {
     switch (activeSection) {
@@ -867,39 +893,49 @@ const ResumeBuilder = () => {
             />
           </div>
         );
-      case 'expertise': 
+      case 'skills':
+      case 'languages':
+      case 'technologies':
+      case 'frameworks':
+      case 'tools':
         return (
           <div className="p-4">
-            <h2 className="text-lg font-semibold mb-4">Expertise & Skills</h2>
-            {templates[selectedTemplate].sections
-              .find(s => s.id === 'expertise')
-              ?.subsections.map((subsection) => (
-                <div key={subsection} className="mb-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <label className="block text-sm font-medium text-gray-700">
-                      {subsection.charAt(0).toUpperCase() + subsection.slice(1)}
-                    </label>
-                    <button
-                      type="button"
-                      onClick={() => handleSubsectionToggle('expertise', subsection)}
-                      className="text-blue-600 hover:text-blue-800 text-sm"
-                    >
-                      {expandedSubsections[`expertise_${subsection}`] ? 'Hide' : 'Show'}
-                    </button>
-                  </div>
-                  {expandedSubsections[`expertise_${subsection}`] && (
-                    <div className="space-y-2">
-                      <input
-                        type="text"
-                        value={resumeData[subsection].join(', ')}
-                        onChange={(e) => handleArrayInput(e, subsection)}
-                        className="w-full border p-2 rounded"
-                        placeholder={`Add ${subsection}...`}
-                      />
-                    </div>
-                  )}
+            <h2 className="text-lg font-semibold mb-4">
+              {activeSection.charAt(0).toUpperCase() + activeSection.slice(1)}
+            </h2>
+            <div className="space-y-2">
+              {resumeData[activeSection].map((entry, index) => (
+                <div key={index} className="flex mb-2">
+                  <input
+                    type="text"
+                    value={entry}
+                    onChange={(e) =>
+                      updateExpertiseEntry(activeSection, index, e.target.value)
+                    }
+                    className="flex-grow border p-2 rounded mr-2"
+                    placeholder={`Enter ${activeSection.slice(0, -1)}`}
+                  />
+                  <button
+                    className="text-red-500 px-2"
+                    onClick={() => removeExpertiseEntry(activeSection, index)}
+                  >
+                    ✕
+                  </button>
                 </div>
               ))}
+              <button
+                className="text-blue-500 text-sm"
+                onClick={() => addExpertiseEntry(activeSection)}
+              >
+                + Add {activeSection.charAt(0).toUpperCase() + activeSection.slice(1, -1)}
+              </button>
+            </div>
+          </div>
+        );
+      case 'expertise':
+        return (
+          <div className="p-4">
+            <p>Select a subsection (e.g., Skills, Languages) from the sidebar to edit.</p>
           </div>
         );
       default:
@@ -916,7 +952,7 @@ const ResumeBuilder = () => {
     <div ref={resumeRef} className="bg-white shadow-lg p-8 mx-auto max-w-4xl">
       <div className="flex justify-between items-start mb-8">
         <div className="flex-grow">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">{resumeData.basicDetails.name}</h1>
+          <h2 className="text-3xl font-bold text-gray-800 mb-2">{resumeData.basicDetails.name}</h2>
           <p className="text-xl text-blue-600 mb-3">{resumeData.basicDetails.title}</p>
           <p className="text-sm text-gray-600 mb-2 flex items-center">
             <span className="mr-4">{resumeData.basicDetails.phone}</span>
@@ -1129,7 +1165,7 @@ const ResumeBuilder = () => {
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
-                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a 1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                       </svg>
                     </button>
                     
