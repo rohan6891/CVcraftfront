@@ -23,12 +23,12 @@ const EnhanceCV: React.FC = () => {
     // Fetch the templates from the JSON file
     const fetchTemplates = async () => {
       try {
-        const response = await fetch("src/assets/cv_images/images.json");
+        const response = await fetch("/cv_images/images.json");
         const data = await response.json();
         const templatesData = data.assets.map((template: any, index: number) => ({
           id: index + 1,
           name: template.name,
-          image: `src/assets/cv_images/${template.fileName}`,
+          image: `/cv_images/${template.fileName}`,
         }));
         setTemplates(templatesData);
       } catch (error) {
