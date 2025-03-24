@@ -32,7 +32,7 @@ function LandingPage() {
       <nav className="relative z-10 px-6 py-4 max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
           <FileText className="w-6 h-6 text-indigo-600" />
-          <span className="font-semibold text-xl">Builder.io</span>
+          <span className="font-semibold text-xl">CV Builder</span>
         </div>
         <div className="flex items-center gap-6">
           <button className="text-gray-600 hover:text-gray-900">Tools</button>
