@@ -3,7 +3,7 @@ interface LoadingAnimationProps {
 }
 
 const LoadingAnimation: React.FC<LoadingAnimationProps> = ({ 
-  message = "Generating Questions..." 
+  message = "Generating ..." 
 }) => {
   return (
     <div className="flex flex-col items-center justify-center p-8">
