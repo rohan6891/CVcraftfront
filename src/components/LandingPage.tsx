@@ -1,9 +1,15 @@
-import React from 'react';
-import { FileText, ChevronRight, LogIn } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { FileText } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { authService } from '../services/auth';
 
 function LandingPage() {
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsLoggedIn(authService.isAuthenticated());
+  }, []);
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
@@ -32,16 +38,36 @@ function LandingPage() {
       <nav className="relative z-10 px-6 py-4 max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
           <FileText className="w-6 h-6 text-indigo-600" />
-          <span className="font-semibold text-xl">CV Builder</span>
+          <span className="font-semibold text-xl text-indigo-600">CV</span>
+          <span className="font-semibold text-xl text-gray-900">Builder.io</span>
         </div>
         <div className="flex items-center gap-6">
           <button className="text-gray-600 hover:text-gray-900">Tools</button>
           <button className="text-gray-600 hover:text-gray-900">Pricing</button>
           <button className="text-gray-600 hover:text-gray-900">FAQ's</button>
-          <button className="text-indigo-600 font-medium" onClick={() => navigate('/login')}>Log In</button>
-          <button className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-gray-800 transition" onClick={() => navigate('/signup')}>
-            Get Started
-          </button>
+          {isLoggedIn ? (
+            <button
+              className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
+              onClick={() => navigate('/dashboard')}
+            >
+              Go to Dashboard
+            </button>
+          ) : (
+            <>
+              <button
+                className="text-indigo-600 font-medium"
+                onClick={() => navigate('/login')}
+              >
+                Log In
+              </button>
+              <button
+                className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition"
+                onClick={() => navigate('/signup')}
+              >
+                Get Started
+              </button>
+            </>
+          )}
         </div>
       </nav>
 
@@ -58,18 +84,29 @@ function LandingPage() {
             employers look for. Easy to use and done within minutes - try now for free!
           </p>
           <div className="flex items-center justify-center gap-4">
-            <button
-              onClick={() => navigate('/signup')}
-              className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition flex items-center gap-2"
-            >
-              + Start Creating
-            </button>
-            <button
-              onClick={() => navigate('/login')}
-              className="text-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-50 transition flex items-center gap-2"
-            >
-              Log In
-            </button>
+            {isLoggedIn ? (
+              <button
+                onClick={() => navigate('/dashboard')}
+                className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition flex items-center gap-2"
+              >
+                Go to Dashboard
+              </button>
+            ) : (
+              <>
+                <button
+                  onClick={() => navigate('/signup')}
+                  className="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition flex items-center gap-2"
+                >
+                  + Start Creating
+                </button>
+                <button
+                  onClick={() => navigate('/login')}
+                  className="text-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-50 transition flex items-center gap-2"
+                >
+                  Log In
+                </button>
+              </>
+            )}
           </div>
         </div>
 
@@ -115,7 +152,7 @@ function LandingPage() {
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-2">
                     <FileText className="w-5 h-5 text-indigo-600" />
-                    <span className="font-medium">Builder.io</span>
+                    <span className="font-medium">CV Builder</span>
                   </div>
                   <button className="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm">
                     Create New

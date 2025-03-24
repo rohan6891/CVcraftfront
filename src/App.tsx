@@ -10,12 +10,13 @@ import { LoginForm } from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import QuestionForm from './components/QuestionForm';
 import JobFindings from './components/JobFindings';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Landing Page without Layout */}
+        {/* Landing Page */}
         <Route path="/" element={<LandingPage />} />
 
         {/* Login Page */}
@@ -24,20 +25,22 @@ function App() {
         {/* Signup Page */}
         <Route path="/signup" element={<SignupForm onSignupSuccess={() => {}} />} />
 
-        {/* Wrap Layout around only the authenticated pages */}
+        {/* Protected Routes */}
         <Route
           path="/*"
           element={
-            <Layout>
-              <Routes>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/enhance-cv" element={<EnhanceCV />} />
-                <Route path="/create-cv" element={<CreateCV />} />
-                <Route path="/ats-score" element={<ATSScore />} />
-                <Route path="/generate" element={<QuestionForm />} />
-                <Route path="/job-findings" element={<JobFindings />} />
-              </Routes>
-            </Layout>
+            <ProtectedRoute>
+              <Layout>
+                <Routes>
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/enhance-cv" element={<EnhanceCV />} />
+                  <Route path="/create-cv" element={<CreateCV />} />
+                  <Route path="/ats-score" element={<ATSScore />} />
+                  <Route path="/generate" element={<QuestionForm />} />
+                  <Route path="/job-findings" element={<JobFindings />} />
+                </Routes>
+              </Layout>
+            </ProtectedRoute>
           }
         />
       </Routes>

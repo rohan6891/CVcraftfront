@@ -7,10 +7,10 @@ import {
   FilePlus,
   Target,
   User,
-  Settings,
   LogOut,
   MessageSquare,
-  Search
+  Search,
+  FileText
 } from 'lucide-react';
 
 interface LayoutProps {
@@ -31,11 +31,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   const menuItems = [
     { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/enhance-cv', label: 'Enhance CV', icon: FileUp },
     { path: '/create-cv', label: 'Create CV', icon: FilePlus },
+    { path: '/enhance-cv', label: 'Enhance CV', icon: FileUp },
     { path: '/ats-score', label: 'ATS Score', icon: Target },
-    { path: '/generate', label: 'Interview Prep', icon: MessageSquare },
     { path: '/job-findings', label: 'Job Findings', icon: Search },
+    { path: '/generate', label: 'Interview Prep', icon: MessageSquare },
   ];
 
   return (
@@ -44,8 +44,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className="w-64 bg-white shadow-lg">
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="p-6 border-b">
-            <h1 className="text-2xl font-bold text-blue-600">CV Builder</h1>
+          <div className="p-6 border-b flex items-center gap-2">
+            <FileText className="w-6 h-6 text-indigo-600" />
+            <h1 className="text-2xl font-bold text-indigo-600">CV</h1>
+            <h1 className="text-2xl font-bold text-gray-900">Builder.io</h1>
           </div>
 
           {/* Navigation */}
@@ -106,4 +108,4 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   );
 }
 
-export default Layout
+export default Layout;

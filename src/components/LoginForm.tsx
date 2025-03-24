@@ -65,7 +65,8 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess }) => {
           <CardHeader>
             <Link to="/" className="flex items-center justify-center"> {/* Added flex styles */}
               <FileText className="w-6 h-6 mr-2" /> {/* Added logo */}
-              <span className={cardHeaderStyle}>Builder.io</span> {/* Added text */}
+              <span className={cardHeaderStyle}>CV</span> {/* Updated text */}
+              <span className="text-2xl font-bold text-gray-900">Builder.io</span> {/* Added text */}
             </Link>
           </CardHeader>
           <CardContent>

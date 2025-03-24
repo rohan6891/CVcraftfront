@@ -62,7 +62,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSignupSuccess }) => {
       await authService.signup(formData.email, formData.password);
       
       setIsSuccess(true);
-      setError('Account created successfully! Redirecting to login...');
+      setError(''); // Clear error message
       onSignupSuccess();
       
       // Reset form
@@ -100,13 +100,19 @@ export const SignupForm: React.FC<SignupFormProps> = ({ onSignupSuccess }) => {
           <CardHeader>
             <Link to="/" className="flex items-center justify-center"> {/* Added flex styles */}
               <FileText className="w-6 h-6 mr-2" /> {/* Added logo */}
-              <span className={cardHeaderStyle}>Builder.io</span> {/* Added text */}
+              <span className={cardHeaderStyle}>CV</span> {/* Updated text */}
+              <span className="text-2xl font-bold text-gray-900">Builder.io</span> {/* Added text */}
             </Link>
           </CardHeader>
           <CardContent>
             {error && (
-              <div className={error ? errorStyle : successStyle}>
-                {error || 'Account created successfully! Redirecting to login...'}
+              <div className={errorStyle}>
+                {error}
+              </div>
+            )}
+            {isSuccess && (
+              <div className={successStyle}>
+                Account created successfully! Redirecting to login...
               </div>
             )}
             <form onSubmit={handleSubmit} className="space-y-4">
