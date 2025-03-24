@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
-import { Upload, Eye, X } from "lucide-react"; // Import icons
+import { Upload } from "lucide-react"; // Import icons
+import config from '../config';
 
 interface Template {
   id: number;
@@ -72,7 +73,7 @@ const EnhanceCV: React.FC = () => {
     console.log("Additional Info:", additionalInfo);
 
     try {
-      const response = await fetch("http://localhost:8000/resume/enhance", {
+      const response = await fetch(`${config.api.baseUrl}${config.api.endpoints.resume.enhance}`, {
         method: "POST",
         body: formData,
       });
