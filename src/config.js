@@ -1,6 +1,6 @@
 const config = {
   api: {
-    baseUrl: 'https://cvbackend.railway.internal',
+    baseUrl: 'https://cvbackend-production-732f.up.railway.app',
     endpoints: {
       auth: {
         login: '/auth/login',
